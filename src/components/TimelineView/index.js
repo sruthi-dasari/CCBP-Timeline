@@ -1,33 +1,40 @@
 import {Chrono} from 'react-chrono'
 import './index.css'
+import {Component} from 'react'
 import CourseTimelineCard from '../CourseTimelineCard'
 import ProjectTimelineCard from '../ProjectTimelineCard'
 
-const TimelineView = props => {
-  const {timelineItemsList} = props
+class TimelineView extends Component {
+  renderCourseCard = item => <CourseTimelineCard courseDetails={item} />
 
-  const renderCourseCard = item => <CourseTimelineCard courseDetails={item} />
+  renderProjectCard = item => <ProjectTimelineCard projectDetails={item} />
 
-  const renderProjectCard = item => (
-    <ProjectTimelineCard projectDetails={item} />
-  )
-
-  const renderTimelineCard = item => {
+  renderTimelineCard = item => {
     if (item.categoryId === 'COURSE') {
-      renderCourseCard(item)
+      this.renderCourseCard(item)
     } else {
-      renderProjectCard(item)
+      this.renderProjectCard(item)
     }
   }
 
-  return (
-    <div className="chrono-container">
-      <h1 className="heading1">MY JOURNEY OF CCBP 4.0</h1>
-      <Chrono mode="VERTICAL_ALTERNATING">
-        {timelineItemsList.map(eachItem => renderTimelineCard(eachItem))}
-      </Chrono>
-    </div>
-  )
+  render() {
+    const {timelineItemsList} = this.props
+
+    return (
+      <div className="chrono-container">
+        <h1 className="heading1">MY JOURNEY OF CCBP 4.0</h1>
+        <Chrono mode="VERTICAL_ALTERNATING">
+          {timelineItemsList.map(eachItem => this.renderTimelineCard(eachItem))}
+          {/* {timelineItemsList.map(eachItem => {
+            if (eachItem.categoryId === 'COURSE') {
+              return this.renderCourseCard()
+            }
+            return this.renderProjectCard()
+          })} */}
+        </Chrono>
+      </div>
+    )
+  }
 }
 
 export default TimelineView
