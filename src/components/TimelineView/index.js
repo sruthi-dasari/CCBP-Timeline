@@ -6,25 +6,25 @@ import ProjectTimelineCard from '../ProjectTimelineCard'
 const TimelineView = props => {
   const {timelineItemsList} = props
 
-  const courseItemsList = timelineItemsList.filter(
-    eachItem => eachItem.categoryId === 'COURSE',
+  const renderCourseCard = item => <CourseTimelineCard courseDetails={item} />
+
+  const renderProjectCard = item => (
+    <ProjectTimelineCard projectDetails={item} />
   )
 
-  const projectItemsList = timelineItemsList.filter(
-    eachItem => eachItem.categoryId === 'PROJECT',
-  )
+  const renderTimelineCard = item => {
+    if (item.categoryId === 'COURSE') {
+      renderCourseCard(item)
+    } else {
+      renderProjectCard(item)
+    }
+  }
 
   return (
     <div className="chrono-container">
-      <h1 className="heading1">MY JOURNEY OF</h1>
-      <h1 className="heading2">CCBP 4.0</h1>
+      <h1 className="heading1">MY JOURNEY OF CCBP 4.0</h1>
       <Chrono mode="VERTICAL_ALTERNATING">
-        {courseItemsList.map(eachItem => (
-          <CourseTimelineCard courseDetails={eachItem} />
-        ))}
-        {projectItemsList.map(eachItem => (
-          <ProjectTimelineCard projectDetails={eachItem} />
-        ))}
+        {timelineItemsList.map(eachItem => renderTimelineCard(eachItem))}
       </Chrono>
     </div>
   )
