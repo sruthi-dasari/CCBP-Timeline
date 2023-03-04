@@ -1,1 +1,4 @@
-/* Write your CSS here */
+.project-timeline-card-container {
+  display: flex;
+  flex-direction: column;
+}
