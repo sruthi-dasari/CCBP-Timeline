@@ -1,1 +1,4 @@
-/* Write your CSS here */
+.course-timeline-card-container {
+  display: flex;
+  flex-direction: column;
+}
