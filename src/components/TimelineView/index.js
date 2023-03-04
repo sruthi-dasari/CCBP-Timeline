@@ -22,16 +22,26 @@ class TimelineView extends Component {
 
     return (
       <div className="chrono-container">
-        <h1 className="heading1">MY JOURNEY OF CCBP 4.0</h1>
-        <Chrono mode="VERTICAL_ALTERNATING">
-          {timelineItemsList.map(eachItem => this.renderTimelineCard(eachItem))}
-          {/* {timelineItemsList.map(eachItem => {
+        <h1 className="main-heading">
+          MY JOURNEY OF <br />
+          <span className="sub-heading">CCBP 4.0</span>
+        </h1>
+
+        {/* {timelineItemsList.map(eachItem => this.renderTimelineCard(eachItem))} */}
+        {/* {timelineItemsList.map(eachItem => {
             if (eachItem.categoryId === 'COURSE') {
               return this.renderCourseCard()
             }
             return this.renderProjectCard()
           })} */}
-        </Chrono>
+
+        <Chrono
+          theme={{
+            secondary: 'white',
+          }}
+          items={timelineItemsList}
+          mode="VERTICAL_ALTERNATING"
+        />
       </div>
     )
   }
